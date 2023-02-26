@@ -41,7 +41,7 @@ VirtualBox Host-Only Net… VirtualBox Host-Only Ethernet Adapter         9 Up  
 1. Modify below variable in SetRouteToHotspot.ps1 to fit your requirement:
    - $AdapterName - string in InterfaceDescription of above command output, can use wildcard(\*) to filter, e.g: \*SAMSUNG\*
    - $RouteToUseSharedNetwork -  String, use IPV4/mask, used for add route. e.g. "172.20.0.0/16"
-   - $SharedNetworkGetway - can use wildcard(*), e.g: 192.168.*, used for setting nexthop
+   - $SharedNetworkGetway - can use wildcard(\*), e.g: 192.168.\*, used for setting nexthop
 
 2. Run this script use Powershell (run as adiministrator)
 
