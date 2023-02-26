@@ -4,7 +4,7 @@
 # Variable for phone network adapter and DCHP IP range, modify to use of other phone
 # phone adapter name ,String , can use wildcard(*) to filter, e.g: *SAMSUNG*
 # use "Get-NetAdapter" command and use string in InterdaceDescription
-$AdapterName = "*SAMSUNG*"
+$AdapterName = "SAMSUNG*"
 
 # RouteToUseSharedNetwork: String, use IPV4/mask, used for add route
 $RouteToUseSharedNetwork = "172.20.0.0/16"
@@ -39,22 +39,23 @@ Write-Output "Getting Information of adapter: $AdapterName..."
 Write-Output ""
 
 try {
-	$ifIndex = Get-NetAdapter -InterfaceDescription $AdapterName | Select-Object -ExpandProperty 'ifIndex'
-	$phoneRouteGetway = Get-NetRoute -ifIndex $ifIndex -NextHop $SharedNetworkGetway | Select-Object -ExpandProperty "Nexthop"
-
-	if (!$ifIndex) {
+	$CheckAdapter = Get-NetAdapter | Select-Object InterfaceDescription | Select-String $AdapterName
+	if (!$CheckAdapter) {
 		Write-Output "Cannot find out adapter interface information:$AdapterName. Not plug in or network not shared?"
 		Write-Output "Check network sharing configuration on device and try again"
 		Read-Host -Prompt "Press Enter to exit"
 		return
 	}
-	
+
+	$ifIndex = Get-NetAdapter -InterfaceDescription $AdapterName | Select-Object -ExpandProperty 'ifIndex'
+	$phoneRouteGetway = Get-NetRoute -ifIndex $ifIndex -NextHop $SharedNetworkGetway | Select-Object -ExpandProperty "Nexthop"	
 }
 catch {
 	Write-Output "Something threw an exception"
 	Write-Output $_
-	return
 	Read-Host -Prompt "Press Enter to exit"
+	return
+	
 }
 
 Write-Output "interface index number of adapter:$AdapterName : $ifIndex\n"
