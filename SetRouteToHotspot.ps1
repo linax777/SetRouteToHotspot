@@ -28,6 +28,7 @@ if ( $oldRouteExist ){
 	catch {
 		Write-Output "Something threw an exception"
 		Write-Output $_
+		Read-Host -Prompt "Press Enter to exit"
 		return
 	}
 }
@@ -44,6 +45,7 @@ try {
 	if (!$ifIndex) {
 		Write-Output "Cannot find out adapter interface information:$AdapterName. Not plug in or network not shared?"
 		Write-Output "Check network sharing configuration on device and try again"
+		Read-Host -Prompt "Press Enter to exit"
 		return
 	}
 	
@@ -52,6 +54,7 @@ catch {
 	Write-Output "Something threw an exception"
 	Write-Output $_
 	return
+	Read-Host -Prompt "Press Enter to exit"
 }
 
 Write-Output "interface index number of adapter:$AdapterName : $ifIndex\n"
@@ -67,7 +70,8 @@ catch {
 	<#Do this if a terminating exception happens#>
 	Write-Output "Something threw an exception"
 	Write-Output $_
+	Read-Host -Prompt "Press Enter to exit"
 	return
 }
-# system-pause
 Read-Host -Prompt "Press Enter to exit"
+
