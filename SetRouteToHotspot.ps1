@@ -3,6 +3,7 @@
 
 # Variable for phone network adapter and DCHP IP range, modify to use of other phone
 # phone adapter name ,String , can use wildcard(*) to filter, e.g: *SAMSUNG*
+# use "Get-NetAdapter" command and use string in InterdaceDescription
 $AdapterName = "*SAMSUNG*"
 
 # RouteToUseSharedNetwork: String, use IPV4/mask, used for add route
