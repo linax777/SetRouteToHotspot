@@ -24,7 +24,12 @@ Windows Powershell script to set new ip route using shared network by mobile pho
 
 ## How to use
 
-Run this script use Powershell (run as adiministrator)
+1. Modify below variable in SetRouteToHotspot.ps1 to fit your requirement:
+   - $AdapterName
+   - $RouteToUseSharedNetwork
+   - $SharedNetworkGetway
+
+2. Run this script use Powershell (run as adiministrator)
 
 ```Powershell
 .\SetRouteToHotspot.ps1
